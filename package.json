@@ -9,6 +9,13 @@
     "email": "jonathanperry@modernpoacher.com",
     "url": "https://modernpoacher.com"
   },
+  "description": "Get a React class component instance from its DOM Element",
+  "keywords": [
+    "react",
+    "class",
+    "component",
+    "instance"
+  ],
   "license": "ISC",
   "engines": {
     "node": ">=18.12.0 <=21.7.3 || >=22.2.0"
