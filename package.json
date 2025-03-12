@@ -53,13 +53,22 @@
   },
   "imports": {
     "#react-component-instance": {
-      "require": "./src/index.mjs",
+      "require": "./src/index.cjs",
       "import": "./src/index.mjs"
     },
-    "#react-component-instance/container": "./src/container/index.mjs"
+    "#react-component-instance/container": {
+      "require": "./src/container/index.mjs",
+      "import": "./src/container/index.mjs"
+    }
   },
   "exports": {
-    ".": "./src/index.mjs",
-    "./container": "./src/container/index.mjs"
+    ".": {
+      "require": "./src/index.cjs",
+      "import": "./src/index.mjs"
+    },
+    "./container": {
+      "require": "./src/container/index.mjs",
+      "import": "./src/container/index.mjs"
+    }
   }
 }
