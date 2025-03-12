@@ -52,7 +52,10 @@
     "react": "^19.0.0"
   },
   "imports": {
-    "#react-component-instance": "./src/index.mjs",
+    "#react-component-instance": {
+      "require": "./src/index.mjs",
+      "import": "./src/index.mjs"
+    },
     "#react-component-instance/container": "./src/container/index.mjs"
   },
   "exports": {
