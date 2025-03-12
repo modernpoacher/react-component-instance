@@ -1,6 +1,6 @@
 # react-component-instance
 
-Get a React class component instance from its `DOM` elements
+Get a React class component instance from its `DOM` element
 
 ```javascript
 import getInstance from 'react-component-instance'

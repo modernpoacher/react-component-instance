@@ -25,3 +25,12 @@
 # Hooks
 .husky/hooks
 
+# Jest
+jest.config.*
+src/**/__tests__
+
+# Babel
+babel.config.*
+
+# ESLint
+eslint.config.*

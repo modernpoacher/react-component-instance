@@ -1,6 +1,13 @@
 {
   "name": "react-component-instance",
   "version": "0.0.1",
+  "description": "Get a React class component instance from its DOM Element",
+  "keywords": [
+    "react",
+    "class",
+    "component",
+    "instance"
+  ],
   "main": "./src/index.mjs",
   "type": "module",
   "types": "./index.d.mts",
@@ -20,8 +27,8 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "npm run lint -- --fix",
-    "test": "NODE_ENV=test jest",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "NODE_ENV=test jest"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
