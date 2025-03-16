@@ -9,24 +9,26 @@ import {
   render
 } from '@testing-library/react'
 
-import getReactComponentInstanceFrom, {
-  findReactComponentInstanceFor
+import getComponentInstanceFrom, {
+  findComponentInstanceFor
 } from '#react-component-instance'
 
 describe('#react-component-instance', () => {
   class Component extends React.Component {
     render () {
       return (
-        <div>
-          <div>
-            <div className='target' />
+        <div className='grand-parent'>
+          <div className='parent'>
+            <div className='child'>
+              Text
+            </div>
           </div>
         </div>
       )
     }
   }
 
-  describe('`getReactComponentInstanceFrom`', () => {
+  describe('`getComponentInstanceFrom`', () => {
     it('gets the instance', () => {
       const {
         container: {
@@ -36,12 +38,12 @@ describe('#react-component-instance', () => {
         <Component />
       )
 
-      expect(getReactComponentInstanceFrom(element))
+      expect(getComponentInstanceFrom(element))
         .toBeInstanceOf(Component)
     })
   })
 
-  describe('`findReactComponentInstanceFor`', () => {
+  describe('`findComponentInstanceFor`', () => {
     it('gets the instance', () => {
       const {
         container: {
@@ -51,7 +53,9 @@ describe('#react-component-instance', () => {
         <Component />
       )
 
-      expect(findReactComponentInstanceFor(element?.querySelector('.target'), Component))
+      const child = element?.querySelector('.child')
+
+      expect(findComponentInstanceFor(child, Component))
         .toBeInstanceOf(Component)
     })
   })

@@ -2,57 +2,37 @@
  *  @typedef {ReactComponentInstanceTypes.FiberNode} FiberNode
  */
 
-/**
- *  @param {PropertyKey} key
- *  @returns {boolean}
- */
-function isReactFiberKey (key) {
-  return String(key).startsWith('__reactFiber$')
-}
-
-/**
- *  @param {FiberNode} fiberNode
- *  @returns {Generator<FiberNode, void, unknown>}
- */
-function * traverseFiberNodeTree (fiberNode) {
-  let currentNode = fiberNode
-
-  while (true) {
-    yield currentNode
-
-    currentNode = currentNode.return
-  }
-}
+import {
+  getFiberFrom,
+  getParentFiberFrom,
+  getChildFiberFrom,
+  getComponentInstance,
+  isComponentType,
+  traverseFiberParents
+} from '#react-component-instance/common'
 
 /**
  *  @param {Element | null | undefined} element
  *  @param {(() => React.JSX.Element) | typeof React.Component} Component
  *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */
-export function findReactComponentInstanceFor (element, Component) {
+export function findComponentInstanceFor (element, Component) {
   if (element instanceof HTMLElement) {
-    const key = (
-      Object.keys(element)
-        .find(isReactFiberKey)
-    )
+    const fiber = getFiberFrom(element)
 
-    if (key) {
-      const { // @ts-expect-error
-        [key]: fiberNode
-      } = element
+    if (fiber) {
+      if (isComponentType(Component, fiber)) {
+        return (
+          getComponentInstance(fiber)
+        )
+      }
 
-      if (fiberNode) {
-        for (const fiber of traverseFiberNodeTree(fiberNode)) {
-          const {
-            type
-          } = fiber
-
-          if (type === Component) {
-            const {
-              stateNode
-            } = fiber
-
-            return stateNode
+      for (const parentFiber of traverseFiberParents(fiber)) {
+        if (parentFiber) {
+          if (isComponentType(Component, parentFiber)) {
+            return (
+              getComponentInstance(parentFiber)
+            )
           }
         }
       }
@@ -65,33 +45,59 @@ export function findReactComponentInstanceFor (element, Component) {
 }
 
 /**
- *  @param {Element | null} element
+ *  @param {Element | null | undefined} element
+ *  @returns {FiberNode | null | undefined}
+ */
+export function getFiberNodeFrom (element) {
+  if (element instanceof HTMLElement) {
+    return (
+      getFiberFrom(element)
+    )
+  }
+
+  throw new Error('Element is not an Element')
+}
+
+/**
+ *  @param {Element | null | undefined} element
+ *  @returns {FiberNode | null | undefined}
+ */
+export function getParentFiberNodeFrom (element) {
+  if (element instanceof HTMLElement) {
+    return (
+      getParentFiberFrom(element)
+    )
+  }
+
+  throw new Error('Element is not an Element')
+}
+
+/**
+ *  @param {Element | null | undefined} element
+ *  @returns {FiberNode | null | undefined}
+ */
+export function getChildFiberNodeFrom (element) {
+  if (element instanceof HTMLElement) {
+    return (
+      getChildFiberFrom(element)
+    )
+  }
+
+  throw new Error('Element is not an Element')
+}
+
+/**
+ *  @param {Element | null | undefined} element
  *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */
-export default function getReactComponentInstanceFrom (element) {
+export default function getComponentInstanceFrom (element) {
   if (element instanceof HTMLElement) {
-    const key = (
-      Object.keys(element)
-        .find(isReactFiberKey)
-    )
+    const parentFiber = getParentFiberFrom(element)
 
-    if (key) {
-      const { // @ts-expect-error
-        [key]: fiberNode
-      } = element
-
-      if (fiberNode) {
-        /**
-         *  `return` is the component which owns `element`
-         */
-        const {
-          return: {
-            stateNode
-          }
-        } = fiberNode
-
-        return stateNode
-      }
+    if (parentFiber) {
+      return (
+        getComponentInstance(parentFiber)
+      )
     }
 
     throw new Error('Component instance is not found')

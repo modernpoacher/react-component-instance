@@ -7,7 +7,7 @@ declare global {
      */
 
     export type FiberNode =
-      | FiberNodeForComponentClass
+      | FiberNodeForClassComponent
       | FiberNodeForFunctionComponent
       | FiberNodeForInstrinsicElement
       | FiberNodeForTextNode
@@ -22,7 +22,7 @@ declare global {
       stateNode: {
         current: FiberRootNode
       }
-      return: FiberRootNode
+      return?: FiberRootNode
     }
 
     export interface FiberNodeForFunctionComponent {
@@ -33,10 +33,10 @@ declare global {
       type: React.FunctionComponent
 
       stateNode: null
-      return: FiberNode
+      return?: FiberNode
     }
 
-    export interface FiberNodeForComponentClass {
+    export interface FiberNodeForClassComponent {
       child: FiberNode | null
       sibling: FiberNode | null
 
@@ -44,7 +44,7 @@ declare global {
       type: React.ComponentClass
 
       stateNode: React.Component
-      return: FiberNode
+      return?: FiberNode
     }
 
     export interface FiberNodeForInstrinsicElement {
@@ -55,7 +55,7 @@ declare global {
       type: keyof React.JSX.IntrinsicElements
 
       stateNode: HTMLElement
-      return: FiberNode
+      return?: FiberNode
     }
 
     export interface FiberNodeForTextNode {
@@ -66,7 +66,7 @@ declare global {
       type: null
 
       stateNode: Text
-      return: FiberNode
+      return?: FiberNode
     }
   }
 }

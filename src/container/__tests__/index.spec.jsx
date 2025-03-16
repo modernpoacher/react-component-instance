@@ -5,10 +5,10 @@ import {
   render
 } from '@testing-library/react'
 
-import getReactComponentInstanceFrom from '#react-component-instance/container'
+import getComponentInstanceFrom from '#react-component-instance/container'
 
 describe('#react-component-instance/container', () => {
-  describe('`getReactComponentInstanceFrom`', () => {
+  describe('`getComponentInstanceFrom`', () => {
     class Component extends React.Component {
       render () {
         return <div />
@@ -22,7 +22,7 @@ describe('#react-component-instance/container', () => {
         <Component />
       )
 
-      expect(getReactComponentInstanceFrom(container))
+      expect(getComponentInstanceFrom(container))
         .toBeInstanceOf(Component)
     })
   })

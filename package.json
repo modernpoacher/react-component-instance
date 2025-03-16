@@ -53,10 +53,12 @@
   },
   "imports": {
     "#react-component-instance": "./src/index.mjs",
+    "#react-component-instance/common": "./src/common/index.mjs",
     "#react-component-instance/container": "./src/container/index.mjs"
   },
   "exports": {
     ".": "./src/index.mjs",
+    "./common": "./src/common/index.mjs",
     "./container": "./src/container/index.mjs"
   }
 }

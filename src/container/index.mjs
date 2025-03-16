@@ -2,28 +2,31 @@
  *  @typedef {ReactComponentInstanceTypes.FiberRootNode} FiberRootNode
  */
 
+import {
+  getContainerFiberFrom
+} from '#react-component-instance/common'
+
 /**
- *  @param {string} key
- *  @returns {boolean}
+ *  @param {Element | null | undefined} container
+ *  @returns {FiberRootNode | null | undefined}
  */
-function isReactContainerKey (key) {
-  return key.startsWith('__reactContainer$')
+export function getContainerFiberNodeFrom (container) {
+  if (container instanceof HTMLElement) {
+    return (
+      getContainerFiberFrom(container)
+    )
+  }
+
+  throw new Error('Container is not an Element')
 }
 
 /**
- *  @param {HTMLElement} container
+ *  @param {Element | null | undefined} container
  *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */
-export default function getReactComponentInstanceFrom (container) {
-  const key = (
-    Object.keys(container)
-      .find(isReactContainerKey)
-  )
-
-  if (key) {
-    const { // @ts-expect-error
-      [key]: fiberNode
-    } = container
+export default function getComponentInstanceFrom (container) {
+  if (container instanceof HTMLElement) {
+    const fiberNode = getContainerFiberFrom(container)
 
     if (fiberNode) {
       const {
@@ -38,7 +41,9 @@ export default function getReactComponentInstanceFrom (container) {
 
       return stateNode
     }
+
+    throw new Error('Component instance is not found')
   }
 
-  throw new Error('Component instance is not found')
+  throw new Error('Container is not an Element')
 }
