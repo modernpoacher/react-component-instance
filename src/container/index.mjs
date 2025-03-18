@@ -21,6 +21,16 @@ export function getContainerFiberNodeFrom (container) {
 }
 
 /**
+ *  @param {{ container: Element }} component
+ *  @returns {Element}
+ */
+export function getComponentElement ({
+  container
+}) {
+  return container
+}
+
+/**
  *  @param {Element | null | undefined} container
  *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */

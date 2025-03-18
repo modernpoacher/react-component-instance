@@ -87,6 +87,18 @@ export function getChildFiberNodeFrom (element) {
 }
 
 /**
+ *  @param {{ container: { firstElementChild: Element | null } }} component
+ *  @returns {Element | null}
+ */
+export function getComponentElement ({
+  container: {
+    firstElementChild: element
+  }
+}) {
+  return element
+}
+
+/**
  *  @param {Element | null | undefined} element
  *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */

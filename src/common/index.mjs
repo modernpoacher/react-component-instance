@@ -137,41 +137,41 @@ export function getContainerFiberFrom (element) {
 }
 
 /**
- * @param {FiberNode} fiber
- * @returns {FiberNode | null | undefined}
+ *  @param {FiberNode} fiber
+ *  @returns {FiberNode | null | undefined}
  */
 export function getParentFiber ({ return: parentFiber }) {
   return parentFiber
 }
 
 /**
- * @param {FiberNode} fiber
- * @returns {FiberNode | null | undefined}
+ *  @param {FiberNode} fiber
+ *  @returns {FiberNode | null | undefined}
  */
 export function getChildFiber ({ child: childFiber }) {
   return childFiber
 }
 
 /**
- * @param {FiberNode} fiber
- * @returns {React.Component<any, any, any> | HTMLElement | Text | null}
+ *  @param {FiberNode} fiber
+ *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */
 export function getComponentInstance ({ stateNode: instance }) {
   return instance
 }
 
 /**
- * @param {(() => React.JSX.Element) | typeof React.Component} Component
- * @param {FiberNode} fiber
- * @returns {boolean}
+ *  @param {(() => React.JSX.Element) | typeof React.Component} Component
+ *  @param {FiberNode} fiber
+ *  @returns {boolean}
  */
 export function isComponentType (Component, { type }) {
   return Component === type
 }
 
 /**
- * @param {(() => React.JSX.Element) | typeof React.Component} Component
- * @returns {(fiber: FiberNode) => boolean}
+ *  @param {(() => React.JSX.Element) | typeof React.Component} Component
+ *  @returns {(fiber: FiberNode) => boolean}
  */
 export function getIsComponentType (Component) {
   return function isComponentType ({ type }) {
