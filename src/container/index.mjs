@@ -21,13 +21,15 @@ export function getContainerFiberNodeFrom (container) {
 }
 
 /**
- *  @param {{ container: Element }} component
- *  @returns {Element}
+ *  @param {{ container: { firstElementChild: Element | null } }} component
+ *  @returns {Element | null}
  */
 export function getComponentElement ({
-  container
+  container: {
+    firstElementChild: element
+  }
 }) {
-  return container
+  return element
 }
 
 /**
