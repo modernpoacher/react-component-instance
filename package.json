@@ -41,7 +41,6 @@
     "@testing-library/react": "^16.2.0",
     "@types/debug": "^4.1.12",
     "@types/jest": "^29.5.14",
-    "@types/prop-types": "^15.7.14",
     "@types/react": "^19.0.11",
     "core-js": "^3.41.0",
     "eslint": "^9.22.0",
