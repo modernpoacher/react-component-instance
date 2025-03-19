@@ -1,4 +1,5 @@
 /**
+ *  @typedef {import('@testing-library/react').RenderResult} RenderType
  *  @typedef {ReactComponentInstanceTypes.FiberRootNode} FiberRootNode
  */
 
@@ -21,7 +22,7 @@ export function getContainerFiberNodeFrom (container) {
 }
 
 /**
- *  @param {{ container: { firstElementChild: Element | null } }} component
+ *  @param {RenderType} component
  *  @returns {Element | null}
  */
 export function getComponentElement ({

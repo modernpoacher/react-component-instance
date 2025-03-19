@@ -8,13 +8,13 @@ import {
 import getComponentInstanceFrom from '#react-component-instance/container'
 
 describe('#react-component-instance/container', () => {
-  describe('`getComponentInstanceFrom`', () => {
-    class Component extends React.Component {
-      render () {
-        return <div />
-      }
+  class Component extends React.Component {
+    render () {
+      return <div />
     }
+  }
 
+  describe('`getComponentInstanceFrom`', () => {
     it('gets the instance', () => {
       const {
         container

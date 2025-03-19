@@ -11,17 +11,28 @@ import getInstance from 'react-component-instance'
 **Note** that for use with _Testing Library_ import from `react-component-instance/container`
 
 ```javascript
-import getInstance from 'react-component-instance/container'
-
 import {
   render
 } from '@testing-library/react'
 
-const {
-  container
-} = render(
-  <Component />
-)
+import getInstance from 'react-component-instance/container'
 
-const instance = getInstance(container)
+describe('`getInstance`', () => {
+  class Component extends React.Component {
+    render () {
+      return <div />
+    }
+  }
+
+  it('gets the instance', () => {
+    const {
+      container
+    } = render(
+      <Component />
+    )
+
+    expect(getInstance(container))
+      .toBeInstanceOf(Component)
+  })
+})
 ```
