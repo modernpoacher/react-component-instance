@@ -3,24 +3,68 @@
 Get a React class component instance from its `DOM` element
 
 ```javascript
-import getInstance from 'react-component-instance'
+import {
+  getInstance,
+  findInstanceFor
+} from 'react-component-instance'
 ```
 
 ## With `@testing-library/react`
-
-**Note** that for use with _Testing Library_ import from `react-component-instance/container`
 
 ```javascript
 import {
   render
 } from '@testing-library/react'
 
-import getInstance from 'react-component-instance/container'
+import {
+  getInstance
+} from 'react-component-instance'
 
 describe('`getInstance`', () => {
   class Component extends React.Component {
     render () {
-      return <div />
+      return (
+        <div className='grand-parent'>
+          <div className='parent'>
+            <div className='child'>
+              TEXT
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
+  it('gets the instance', () => {
+    expect(getInstance(render(
+      <Component />
+    )))
+      .toBeInstanceOf(Component)
+  })
+})
+```
+
+```javascript
+import {
+  render
+} from '@testing-library/react'
+
+import {
+  findInstanceFor
+} from 'react-component-instance'
+
+describe('`findInstanceFor`', () => {
+  class Component extends React.Component {
+    render () {
+      return (
+        <div className='grand-parent'>
+          <div className='parent'>
+            <div className='child'>
+              TEXT
+            </div>
+          </div>
+        </div>
+      )
     }
   }
 
@@ -31,7 +75,9 @@ describe('`getInstance`', () => {
       <Component />
     )
 
-    expect(getInstance(container))
+    const child  = container.querySelector('.child')
+
+    expect(findInstanceFor(child, Component))
       .toBeInstanceOf(Component)
   })
 })

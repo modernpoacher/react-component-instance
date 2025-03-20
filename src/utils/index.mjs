@@ -156,7 +156,25 @@ export function getChildFiber ({ child: childFiber }) {
  *  @param {FiberNode} fiber
  *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */
-export function getComponentInstance ({ stateNode: instance }) {
+export function getComponentInstance ({
+  stateNode: instance = null
+}) {
+  return instance
+}
+
+/**
+ *  @param {FiberRootNode} fiber
+ *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
+ */
+export function getContainerInstance ({
+  stateNode: {
+    current: {
+      child: {
+        stateNode: instance = null
+      }
+    }
+  }
+}) {
   return instance
 }
 

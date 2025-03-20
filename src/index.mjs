@@ -1,23 +1,140 @@
 /**
  *  @typedef {import('@testing-library/react').RenderResult} RenderType
+ *  @typedef {ReactComponentInstanceTypes.FiberRootNode} FiberRootNode
  *  @typedef {ReactComponentInstanceTypes.FiberNode} FiberNode
  */
 
 import {
+  getContainerFiberFrom,
   getFiberFrom,
   getParentFiberFrom,
   getChildFiberFrom,
   getComponentInstance,
+  getContainerInstance,
   isComponentType,
   traverseFiberParents
-} from '#react-component-instance/common'
+} from './utils/index.mjs'
+
+/**
+ *  @param {Element | null | undefined} containerElement
+ *  @returns {FiberRootNode | null | undefined}
+ */
+export function getContainerFiberNodeFrom (containerElement) {
+  if (containerElement instanceof HTMLElement) {
+    return (
+      getContainerFiberFrom(containerElement)
+    )
+  }
+
+  throw new Error('Container is not an Element')
+}
+
+/**
+ *  @param {Element | null} [element]
+ *  @returns {FiberNode | null | undefined}
+ */
+export function getFiberNodeFrom (element) {
+  if (element instanceof HTMLElement) {
+    return (
+      getFiberFrom(element)
+    )
+  }
+
+  throw new Error('Element is not an Element')
+}
+
+/**
+ *  @param {Element | null} [element]
+ *  @returns {FiberNode | null | undefined}
+ */
+export function getParentFiberNodeFrom (element) {
+  if (element instanceof HTMLElement) {
+    return (
+      getParentFiberFrom(element)
+    )
+  }
+
+  throw new Error('Element is not an Element')
+}
+
+/**
+ *  @param {Element | null} [element]
+ *  @returns {FiberNode | null | undefined}
+ */
+export function getChildFiberNodeFrom (element) {
+  if (element instanceof HTMLElement) {
+    return (
+      getChildFiberFrom(element)
+    )
+  }
+
+  throw new Error('Element is not an Element')
+}
+
+/**
+ *  @param {RenderType} render
+ *  @returns {Element | null}
+ */
+export function getComponentElementFromRender ({
+  container: {
+    firstElementChild: componentElement
+  }
+}) {
+  return componentElement
+}
+
+/**
+ *  @param {RenderType} render
+ *  @returns {Element | null}
+ */
+export function getContainerElementFromRender ({
+  container: containerElement
+}) {
+  return containerElement
+}
+
+/**
+ *  @param {Element | null} [containerElement]
+ *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
+ */
+export function getInstanceFromContainerElement (containerElement) {
+  if (containerElement instanceof HTMLElement) {
+    const containerFiber = getContainerFiberFrom(containerElement)
+
+    if (containerFiber) {
+      return (
+        getContainerInstance(containerFiber)
+      )
+    }
+  }
+
+  return null
+}
+
+/**
+ *  @param {Element | null} [componentElement]
+ *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
+ */
+export function getInstanceFromComponentElement (componentElement) {
+  if (componentElement instanceof HTMLElement) {
+    const parentFiber = getParentFiberFrom(componentElement)
+
+    if (parentFiber) {
+      return (
+        getComponentInstance(parentFiber)
+      )
+    }
+  }
+
+  return null
+}
 
 /**
  *  @param {Element | null | undefined} element
  *  @param {(() => React.JSX.Element) | typeof React.Component} Component
  *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */
-export function findComponentInstanceFor (element, Component) {
+export function findInstanceFor (element, Component) {
   if (element instanceof HTMLElement) {
     const fiber = getFiberFrom(element)
 
@@ -38,83 +155,27 @@ export function findComponentInstanceFor (element, Component) {
         }
       }
     }
-
-    throw new Error('Component instance is not found')
   }
 
-  throw new Error('Element is not an Element')
+  return null
 }
 
 /**
- *  @param {Element | null | undefined} element
- *  @returns {FiberNode | null | undefined}
- */
-export function getFiberNodeFrom (element) {
-  if (element instanceof HTMLElement) {
-    return (
-      getFiberFrom(element)
-    )
-  }
-
-  throw new Error('Element is not an Element')
-}
-
-/**
- *  @param {Element | null | undefined} element
- *  @returns {FiberNode | null | undefined}
- */
-export function getParentFiberNodeFrom (element) {
-  if (element instanceof HTMLElement) {
-    return (
-      getParentFiberFrom(element)
-    )
-  }
-
-  throw new Error('Element is not an Element')
-}
-
-/**
- *  @param {Element | null | undefined} element
- *  @returns {FiberNode | null | undefined}
- */
-export function getChildFiberNodeFrom (element) {
-  if (element instanceof HTMLElement) {
-    return (
-      getChildFiberFrom(element)
-    )
-  }
-
-  throw new Error('Element is not an Element')
-}
-
-/**
- *  @param {RenderType} component
- *  @returns {Element | null}
- */
-export function getComponentElement ({
-  container: {
-    firstElementChild: element
-  }
-}) {
-  return element
-}
-
-/**
- *  @param {Element | null | undefined} element
+ *  @param {RenderType} render
  *  @returns {React.Component<any, any, any> | HTMLElement | Text | null}
  */
-export default function getComponentInstanceFrom (element) {
-  if (element instanceof HTMLElement) {
-    const parentFiber = getParentFiberFrom(element)
+export function getInstance (render) {
+  const componentElement = getComponentElementFromRender(render)
+
+  if (componentElement instanceof HTMLElement) {
+    const parentFiber = getParentFiberFrom(componentElement)
 
     if (parentFiber) {
       return (
         getComponentInstance(parentFiber)
       )
     }
-
-    throw new Error('Component instance is not found')
   }
 
-  throw new Error('Element is not an Element')
+  return null
 }

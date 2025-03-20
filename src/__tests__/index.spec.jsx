@@ -9,8 +9,11 @@ import {
   render
 } from '@testing-library/react'
 
-import getComponentInstanceFrom, {
-  findComponentInstanceFor
+import {
+  getInstance,
+  findInstanceFor,
+  getInstanceFromContainerElement,
+  getInstanceFromComponentElement
 } from '#react-component-instance'
 
 describe('#react-component-instance', () => {
@@ -28,22 +31,44 @@ describe('#react-component-instance', () => {
     }
   }
 
-  describe('`getComponentInstanceFrom`', () => {
+  describe('`getInstance`', () => {
     it('gets the instance', () => {
-      const {
-        container: {
-          firstElementChild: element
-        }
-      } = render(
+      expect(getInstance(render(
         <Component />
-      )
-
-      expect(getComponentInstanceFrom(element))
+      )))
         .toBeInstanceOf(Component)
     })
   })
 
-  describe('`findComponentInstanceFor`', () => {
+  describe('`findInstanceFor`', () => {
+    it('gets the instance', () => {
+      const {
+        container
+      } = render(
+        <Component />
+      )
+
+      const child = container.querySelector('.child')
+
+      expect(findInstanceFor(child, Component))
+        .toBeInstanceOf(Component)
+    })
+  })
+
+  describe('`getInstanceFromContainerElement`', () => {
+    it('gets the instance', () => {
+      const {
+        container
+      } = render(
+        <Component />
+      )
+
+      expect(getInstanceFromContainerElement(container))
+        .toBeInstanceOf(Component)
+    })
+  })
+
+  describe('`getInstanceFromComponentElement`', () => {
     it('gets the instance', () => {
       const {
         container: {
@@ -53,9 +78,7 @@ describe('#react-component-instance', () => {
         <Component />
       )
 
-      const child = element?.querySelector('.child')
-
-      expect(findComponentInstanceFor(child, Component))
+      expect(getInstanceFromComponentElement(element))
         .toBeInstanceOf(Component)
     })
   })
