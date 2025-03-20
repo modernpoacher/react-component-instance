@@ -16,7 +16,7 @@ import {
 } from './utils/index.mjs'
 
 /**
- *  @param {Element | null | undefined} containerElement
+ *  @param {Element | null} [containerElement]
  *  @returns {FiberRootNode | null | undefined}
  */
 export function getContainerFiberNodeFrom (containerElement) {

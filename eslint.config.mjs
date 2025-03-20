@@ -163,6 +163,9 @@ export default [
         ...globals.browser,
         ReactComponentInstanceTypes: 'readonly'
       }
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off'
     }
   })
 ]
