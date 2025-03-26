@@ -3,9 +3,9 @@ import type React from 'react'
 type FiberRootNode = ReactComponentInstanceTypes.FiberRootNode
 type FiberNode = ReactComponentInstanceTypes.FiberNode
 
-export function isReactFiberKey (key: PropertyKey) : boolean
+export function isReactFiberKey (key: PropertyKey): boolean
 
-export function isReactPropsKey (key: PropertyKey) : boolean
+export function isReactPropsKey (key: PropertyKey): boolean
 
 export function isReactContainerFiberKey (key: PropertyKey): boolean
 

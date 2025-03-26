@@ -22,6 +22,6 @@ export function getInstanceFromContainerElement (containerElement?: Element | nu
 
 export function getInstanceFromComponentElement (componentElement?: Element | null): React.Component<any, any> | HTMLElement | Text | null
 
-export function findInstanceFor (element: Element | null | undefined, Component: (() => React.JSX.Element) | typeof React.Component) : React.Component<any, any> | HTMLElement | Text | null
+export function findInstanceFor (element: Element | null | undefined, Component: (() => React.JSX.Element) | typeof React.Component): React.Component<any, any> | HTMLElement | Text | null
 
 export function getInstance (render: RenderType): React.Component<any, any> | HTMLElement | Text | null
