@@ -3,6 +3,8 @@ import type {
   RenderResult as RenderType
 } from '@testing-library/react'
 
+import '#react-component-instance/utils'
+
 type FiberRootNode = ReactComponentInstanceTypes.FiberRootNode
 type FiberNode = ReactComponentInstanceTypes.FiberNode
 

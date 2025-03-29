@@ -21,7 +21,7 @@ export function getParentFiberFrom (element: Element): FiberNode | null | undefi
 
 export function getChildFiberFrom (element: Element): FiberNode | null | undefined
 
-export function getContainerFiberFrom (element: Element): FiberNode | null | undefined
+export function getContainerFiberFrom (element: Element): FiberRootNode | null | undefined
 
 export function getParentFiber (fiber: FiberNode): FiberNode | null | undefined
 

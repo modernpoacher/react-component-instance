@@ -12,6 +12,8 @@ import {
 import {
   getInstance,
   findInstanceFor,
+  getContainerElementFromRender,
+  getComponentElementFromRender,
   getInstanceFromContainerElement,
   getInstanceFromComponentElement
 } from '#react-component-instance'
@@ -57,28 +59,18 @@ describe('#react-component-instance', () => {
 
   describe('`getInstanceFromContainerElement`', () => {
     it('gets the instance', () => {
-      const {
-        container
-      } = render(
+      expect(getInstanceFromContainerElement(getContainerElementFromRender(render(
         <Component />
-      )
-
-      expect(getInstanceFromContainerElement(container))
+      ))))
         .toBeInstanceOf(Component)
     })
   })
 
   describe('`getInstanceFromComponentElement`', () => {
     it('gets the instance', () => {
-      const {
-        container: {
-          firstElementChild: element
-        }
-      } = render(
+      expect(getInstanceFromComponentElement(getComponentElementFromRender(render(
         <Component />
-      )
-
-      expect(getInstanceFromComponentElement(element))
+      ))))
         .toBeInstanceOf(Component)
     })
   })

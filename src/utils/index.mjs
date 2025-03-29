@@ -1,6 +1,6 @@
 /**
- *  @typedef {ReactComponentInstanceTypes.FiberNode} FiberNode
  *  @typedef {ReactComponentInstanceTypes.FiberRootNode} FiberRootNode
+ *  @typedef {ReactComponentInstanceTypes.FiberNode} FiberNode
  */
 
 /**
