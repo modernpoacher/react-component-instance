@@ -42,7 +42,7 @@
     "@types/debug": "^4.1.12",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
     "core-js": "^3.42.0",
     "eslint": "^9.26.0",
     "eslint-plugin-react": "^7.37.5",
