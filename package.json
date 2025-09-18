@@ -1,6 +1,6 @@
 {
   "name": "react-component-instance",
-  "version": "0.0.94",
+  "version": "0.0.95",
   "description": "Get a React class component instance from its DOM Element",
   "keywords": [
     "react",
