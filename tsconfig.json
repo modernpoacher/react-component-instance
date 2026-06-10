@@ -9,10 +9,10 @@
     "jsx": "react",
     "paths": {
       "#react-component-instance": [
-        "src/index.mjs"
+        "./src/index.mjs"
       ],
       "#react-component-instance/utils": [
-        "src/utils/index.mjs"
+        "./src/utils/index.mjs"
       ]
     }
   },
