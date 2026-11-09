@@ -6,11 +6,11 @@
     "checkJs": true,
     "noEmit": true,
     "strict": true,
-    "jsx": "react",
     "types": [
       "node",
       "jest"
     ],
+    "jsx": "react",
     "paths": {
       "#react-component-instance": [
         "./src/index.mjs"
